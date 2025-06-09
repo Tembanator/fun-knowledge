@@ -1,23 +1,40 @@
-// @ts-nocheck here to disable TypeScript checking for this file
-
 "use client";
 import React, { useState } from "react";
 
-export const QuizComponent = ({ quizData }) => {
-  // State to manage the visibility of answers for each question
-  const [showAnswers, setShowAnswers] = useState({});
+type QuestionFact = {
+  id: string;
+  question: string;
+  answer?: string;
+};
+
+type QuizData = {
+  quizTitle: string;
+  yourName: string;
+  category: string;
+  difficultyFactType: string;
+  questionsFacts: QuestionFact[];
+  additionalNotes?: string;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+};
+
+type Props = {
+  quizData: QuizData;
+};
+
+export const QuizComponent: React.FC<Props> = ({ quizData }) => {
+  const [showAnswers, setShowAnswers] = useState<Record<string, boolean>>({});
 
   const toggleAnswer = (questionId: string) => {
     setShowAnswers((prevShowAnswers) => ({
       ...prevShowAnswers,
-      [questionId]: !prevShowAnswers[questionId] as boolean,
+      [questionId]: !prevShowAnswers[questionId],
     }));
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 md:p-8 font-sans">
       <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 md:p-10 max-w-2xl w-full">
-        {/* Quiz Header */}
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 text-center">
           {quizData.quizTitle}
         </h1>
@@ -33,7 +50,6 @@ export const QuizComponent = ({ quizData }) => {
           </span>
         </div>
 
-        {/* Questions Section */}
         <div className="space-y-6">
           {quizData.questionsFacts.map((questionFact) => (
             <div
@@ -43,7 +59,7 @@ export const QuizComponent = ({ quizData }) => {
               <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
                 Q: {questionFact.question}
               </h3>
-              {questionFact.answer && (
+              {questionFact.answer ? (
                 <div>
                   <button
                     onClick={() => toggleAnswer(questionFact.id)}
@@ -59,8 +75,7 @@ export const QuizComponent = ({ quizData }) => {
                     </p>
                   )}
                 </div>
-              )}
-              {!questionFact.answer && (
+              ) : (
                 <p className="mt-2 text-sm text-gray-500 italic">
                   (No answer provided for this question)
                 </p>
@@ -69,7 +84,6 @@ export const QuizComponent = ({ quizData }) => {
           ))}
         </div>
 
-        {/* Additional Notes */}
         {quizData.additionalNotes && (
           <div className="mt-8 pt-6 border-t border-gray-200">
             <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-2">
@@ -81,7 +95,6 @@ export const QuizComponent = ({ quizData }) => {
           </div>
         )}
 
-        {/* Footer */}
         <p className="mt-8 text-xs text-gray-400 text-center">
           Created At: {new Date(quizData.createdAt).toLocaleDateString()} | Last
           Updated: {new Date(quizData.updatedAt).toLocaleDateString()}
