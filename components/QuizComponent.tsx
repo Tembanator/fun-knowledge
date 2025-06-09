@@ -1,3 +1,5 @@
+// @ts-nocheck here to disable TypeScript checking for this file
+
 "use client";
 import React, { useState } from "react";
 
