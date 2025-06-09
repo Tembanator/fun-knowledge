@@ -1,43 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-const quizData = {
-  id: "60c72b2f9a7b5c001f8e4d3c",
-  quizTitle: "General Knowledge Challenge",
-  yourName: "AI Assistant",
-  category: "Other", // Using 'Other' from the Category enum
-  difficultyFactType: "MultipleChoice", // Using 'MultipleChoice' from the DifficultyFactType enum
-  questionsFacts: [
-    {
-      id: "60c72b2f9a7b5c001f8e4d3d",
-      quizId: "60c72b2f9a7b5c001f8e4d3c",
-      question: "What is the capital of France?",
-      answer: "Paris",
-    },
-    {
-      id: "60c72b2f9a7b5c001f8e4d3e",
-      quizId: "60c72b2f9a7b5c001f8e4d3c",
-      question: "Is the Earth flat?",
-      answer: "False",
-    },
-    {
-      id: "60c72b2f9a7b5c001f8e4d3f",
-      quizId: "60c72b2f9a7b5c001f8e4d3c",
-      question: "Which planet is known as the Red Planet?",
-      answer: "Mars",
-    },
-    {
-      id: "60c72b2f9a7b5c001f8e4d40",
-      quizId: "60c72b2f9a7b5c001f8e4d3c",
-      question: "Who painted the Mona Lisa?",
-      answer: "Leonardo da Vinci",
-    },
-  ],
-  additionalNotes: "This quiz covers various general knowledge topics.",
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-};
-
 export const QuizComponent = ({ quizData }) => {
   // State to manage the visibility of answers for each question
   const [showAnswers, setShowAnswers] = useState({});
